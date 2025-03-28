@@ -16,7 +16,6 @@ public class Product {
         this.sizes = sizes;
     }
 
-
     //Métodos de un producto.
     public String getSku() { return sku; }
     public String getName() { return name; }
@@ -31,21 +30,34 @@ public class Product {
         this.sizes = sizes;
     }
 
+    // Cambiar la descripción
+    public void updateDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    // Agregar o actualizar una talla
+    public void updateSizeQuantity(String size, int quantity) {
+        sizes.put(size, quantity);
+    }
+
+    // Eliminar una talla
+    public boolean removeSize(String size) {
+        return sizes.remove(size) != null;
+    }
 
     //Reescribe directamente en el main.
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("SKU: ").append(sku).append("\n");
-        sb.append("Name: ").append(name).append("\n");
-        sb.append("Description: ").append(description).append("\n");
-        sb.append("Sizes available:\n");
+        sb.append("\nSKU: ").append(sku).append("\n");
+        sb.append("Nombre: ").append(name).append("\n");
+        sb.append("Descripción: ").append(description).append("\n");
+        sb.append("Tallas disponibles \n");
         for (Map.Entry<String, Integer> entry : sizes.entrySet()) {
             sb.append("  - ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
         }
         return sb.toString();
     }
-
 
     //Reescribe en el CSV al momento de agregar productos.
     public String toCSVLine() {
@@ -56,10 +68,8 @@ public class Product {
         return sku + "," + name + "," + description + "," + joiner.toString();
     }
 
-
-
-        //Clase que se encarga de pasar el número específico de tallas a una cadena String
-        public static Map<String, Integer> parseSizes(String tallasStr){
+    //Clase que se encarga de pasar el número específico de tallas a una cadena String
+    public static Map<String, Integer> parseSizes(String tallasStr){
         Map<String, Integer> sizes = new HashMap<>();
         String[] tallas = tallasStr.split("\\|");
         for (String talla : tallas) {
@@ -70,17 +80,4 @@ public class Product {
         }
         return sizes;
     }
-
-    
-    //Clase para eliminar una talla.
-    public void removeSize(String sizeKey) {
-        if (sizes.containsKey(sizeKey)) {
-            sizes.remove(sizeKey);
-        } else {
-            System.out.println("Talla '" + sizeKey + "' no existe.");
-        }
-    }
-    
-
-}
-
+} 
