@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -80,12 +81,25 @@ public class Store {
                     break;
 
                 case "4":
-                    System.out.println("Lista de todo los productos:");
-                    for (Product p : inventory.listAllProducts()) {
-                        System.out.println(p);
+                    System.out.println("¿Cómo desea ordenar los productos?");
+                    System.out.println("1. Por SKU");
+                    System.out.println("2. Por nombre");
+                    String sortOption = scanner.nextLine();
+                
+                    if (sortOption.equals("1")) {
+                        for (Product p : inventory.listAllProducts()) {
+                            System.out.println(p);
+                        }
+                    } else if (sortOption.equals("2")) {
+                        for (Product p : inventory.listAllProductsByName()) {
+                            System.out.println(p);
+                        }
+                    } else {
+                        System.out.println("Tu opción es inválida.");
+                        System.out.println("Prueba de nuevo.");
                     }
                     break;
-
+            
                 case "5":
                     System.out.print("Ingresa el nombre del nuevo archivo CSV: ");
                     String outputName = scanner.nextLine();

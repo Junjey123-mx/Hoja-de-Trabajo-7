@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -66,5 +67,10 @@ public class Inventory {
     // Lista todos los productos en orden por SKU
     public ArrayList<Product> listAllProducts() {
         return new ArrayList<>(skuTree.inOrderValues());
+    }
+
+    // Lista todos los productos en orden por nombre
+    public ArrayList<Product> listAllProductsByName() {
+        return new ArrayList<>(nameTree.inOrderValues());
     }
 }
